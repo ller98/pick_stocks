@@ -1,0 +1,34 @@
+{
+  "enabled": true,
+  "weights": {
+    "valuation": 0.45,
+    "sentiment": 0.30,
+    "volume_energy": 0.25
+  },
+  "breadth_tilt": {
+    "stock_width_low": 30,
+    "tilt_points": 8
+  },
+  "heat_bands": {
+    "overheat": 70,
+    "neutral_high": 55,
+    "neutral_low": 40,
+    "panic": 30
+  },
+  "decisions": {
+    "overheat":     {"position_range": "15%-30%", "action": "逐步减仓", "style": "防御性轻仓", "growth_limit": 5, "defense_boost": true,  "label": "过热/狂热"},
+    "neutral_high": {"position_range": "30%-50%", "action": "观望为主、高抛低吸", "style": "价值防御、低PB银行+高股息", "growth_limit": 6, "defense_boost": false, "label": "中性偏热"},
+    "neutral_low":  {"position_range": "30%-50%", "action": "价值防御、精选", "style": "价值防御为主、精选成长", "growth_limit": 7, "defense_boost": false, "label": "中性偏冷"},
+    "panic":        {"position_range": "40%-60%", "action": "逐步加仓", "style": "价值防御为主、精选成长", "growth_limit": 8, "defense_boost": false, "label": "恐慌低位"}
+  },
+  "manual_override": false,
+  "reversal_confirm": {
+    "enabled": true,
+    "confirm_valuation_max": 35,
+    "confirm_sentiment_max": 30,
+    "downgrade_band": "neutral_low",
+    "note": "heat 二次确认（2026-09-02 新增）：heat 跌进恐慌区(<heat_bands.panic=40)不再无条件判逐步加仓。须估值分(confirm_valuation_max)与情绪分(confirm_sentiment_max)同步跌到低位，确认为真恐慌低位(便宜)才逐步加仓；否则降级为 downgrade_band(neutral_low，维持防御观望)，避免下跌初期高位跌接飞刀过早抄底。跌法(放量恐慌vs缩量阴跌)需盘中数据，由盘中决策任务补充。"
+  },
+  "updated": "2026-09-02",
+  "note": "择时去主观化：用 westock-data market-overview 的硬指标数值分（估值分 VALUATION_SCORE / 情绪分 SENTIMENT_SCORE / 量能分 VOLUME_ENERGE_SCORE / 宽度分 STOCK_WIDTH_SCORE）计算市场热度 heat(0-100)，higher=越贵越热越应减仓。反指逻辑据此定仓位：heat 高→减仓，heat 低(恐慌)→加仓。替代原定性'情绪狂热/恐慌'词，可回测可纠错。manual_override=false：硬指标为择时唯一可信源，market_narrative.json 的 market_gate 不再覆盖（避免过时主观配置压制实时量化信号）；如需强制手动干预，将此开关改为 true。"
+}

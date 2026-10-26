@@ -1,0 +1,42 @@
+{
+  "_comment": "第一步全市场初选配置 - 2026-09-01 数据源由 mx-ds-mcp 切换为 westock-mcp",
+  "data_source": "westock-mcp",
+  "tool": "mcp__westock-mcp__tool_filter",
+  "switched_at": "2026-09-01",
+  "switched_reason": "mx-ds-mcp 限频严重（8调用仅2成功）；westock-mcp 已连接、免费、无额度限制",
+
+  "lines": {
+    "growth": {
+      "desc": "成长线",
+      "expression": "intersect([PE_TTM > 5, PE_TTM < 40, PB > 0, PB < 4, NPParentCompanyYOY > 20])",
+      "limit": 100,
+      "market": "hs",
+      "orderby": "PE_TTM",
+      "order": "asc"
+    },
+    "cyclical": {
+      "desc": "周期线",
+      "expression": "intersect([PB > 0, PB < 0.8, PE_TTM > 0])",
+      "limit": 25,
+      "market": "hs",
+      "orderby": "PB",
+      "order": "asc"
+    }
+  },
+
+  "coarse_max_per_sector": 8,
+
+  "critical_notes": [
+    "【坑1·语法】表达式必须写 intersect([A, B, C])，写 'A and B' 会报 高级选股异常 error_type=2",
+    "【坑2·PB负值】必须显式加 PB > 0，否则混入财务异常股（实测混进厦门信达 PB=-15.10）",
+    "【坑3·行业粒度】westock profile 只返回申万一级行业（mx 返回三级），同一级行业标的更多，粗筛配额必须由 3 放宽到 8，否则误杀行业内第4名（实测焦作万方/盐湖股份/中国建筑均恰好排第4被误杀，放宽后重叠率 28.6%→60%）",
+    "【口径】筛选层只有归母增速 NPParentCompanyYOY，无扣非增速字段（NPDeductNonRecurringPL 是绝对金额）。初选宽进（归母），第三步扣非严出——硬约束未失守",
+    "【口径】筛选层无 ST 过滤字段，由第三步财务复核兜底"
+  ],
+
+  "fallback": {
+    "desc": "westock-mcp 不可用时降级到 mx-ds-mcp",
+    "tool": "mcp__mx-ds-mcp__mx_stocks_screener",
+    "note": "mx 返回申万三级行业，此时应把 coarse_max_per_sector 改回 3"
+  }
+}

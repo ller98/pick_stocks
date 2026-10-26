@@ -1,0 +1,4 @@
+# 核心逻辑仅依赖 Python 标准库（json/os/subprocess/sys/re/collections/datetime/pathlib）。
+# 生产级 model.py 通过 westock-data CLI 获取数据，无需额外 PyPI 依赖。
+# 仅测试需要 pytest：
+pytest>=7.0

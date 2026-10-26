@@ -1,0 +1,9 @@
+{
+  "enabled": true,
+  "granularity": "sw_level1",
+  "max_per_sector": 2,
+  "keep_criterion": "composite",
+  "stage": "final",
+  "updated_at": "2026-09-10",
+  "updated_reason": "用户要求放开同板块上限，由每板块1只放宽到2只（仍防假分散，但给同板块差异化留口子，如1大行+1城商行）。申万一级行业去重，每板块仅保留综合最优2只；综合最优=pass优先→估值最优(成长取PEG低/周期取PB低)→ROE最高。仅作用于最终备选/推荐列表，初选池保留全量。想再放开改 max_per_sector 即可。注意：granularity 字段代码未实现二级去重，改它无效。"
+}

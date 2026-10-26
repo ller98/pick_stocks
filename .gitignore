@@ -1,0 +1,27 @@
+# ---- 运行生成物（可重新生成，不提交）----
+data/pool.json
+data/quant_summary.json
+data/winrate_report.json
+data/exit_monitor.json
+data/pick_history.jsonl
+data/intraday_quotes.json
+data/*_example.json
+
+# ---- 个人隐私 / 真实持仓（绝对禁止提交）----
+*_holdings*.json
+*_my_holdings*.json
+*.bak
+*.bak_*
+
+# ---- Python ----
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# ---- 编辑器 / 系统 ----
+.vscode/
+.idea/
+.DS_Store

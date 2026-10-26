@@ -1,0 +1,22 @@
+{
+    "momentum": {
+    "enabled": true,
+    "method": "maturity_penalty",
+    "use_in_score": true,
+    "points": 8,
+    "lookback_months": 12,
+    "skip_months": 1,
+    "strong_up": 0.50,
+    "strong_down": -0.30,
+    "mom_mature": 0.60,
+    "rsi_low": 50,
+    "rsi_high": 80,
+    "w_mom": 0.6,
+    "w_rsi": 0.4,
+    "warn_mom": 0.80,
+    "warn_rsi": 70,
+    "warn_mom_down": -0.30,
+    "warn_rsi_low": 30,
+    "note": "【2026-10-15 反转尝试并撤回】曾短暂翻转为 maturity_bonus 并跑回测，结果证明反转错误：用模型同款 maturity_score（12-1月动量w=0.6+RSI_6 w=0.4）在280条历史入选上模拟'偏好强势'，top50%组合前向20日=-4.19%(t=-4.12)显著比基线-2.53%更差；反而最弱分位(bottom50%)=-0.87%更好。根因：maturity_score的60%权重是12-1月动量(UMD)，该信号决定性回测已证伪为噪声/负向，另一分量高RSI也偏负——反转只是放大坏信号。信号狩猎中真正方向为正的'贴近20日新高/6月相对强度'(短lookback)当前 maturity_score 并不含。故撤回归 penalty 原状。真正'会涨'杠杆应是用短周期强度信号(pos20/RSI无关)替换此因子，而非反转。bonus 分支代码保留，可随时改回 method=maturity_bonus。"
+  }
+}

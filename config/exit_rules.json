@@ -1,0 +1,14 @@
+{
+  "enabled": true,
+  "max_drawdown_pct": 8,
+  "break_ma": "MA20",
+  "time_stop_days": 60,
+  "time_stop_min_pct": -10,
+  "hard_exit": true,
+  "intra_drop_warn": -5,
+  "intra_drop_hard": -7,
+  "volume_ratio_alert": 3.0,
+  "true_panic_relax": true,
+  "updated": "2026-09-02",
+  "note": "硬止损/退出纪律（写入选股标准，非仅监控）：个股从建仓参考价回撤≥max_drawdown_pct% 即强制减仓；收盘价跌破 break_ma 即减；持有超 time_stop_days 日且浮亏≥time_stop_min_pct% 即评估退出。monitor_exits.py 盘前按晨收算；intraday_decision.py 盘中按现价补算盘中成本回撤+单日跌幅熔断+放量下跌三维卖出信号。intra_drop_warn/hard 为单日跌幅两档（预警/强减）；volume_ratio_alert 为放量阈值；true_panic_relax=true 时大盘真恐慌低位(heat<40+估值<35+情绪<30)对MA20破位降级为'观察'防错杀。改配置即生效。"
+}

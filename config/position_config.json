@@ -1,0 +1,8 @@
+{
+  "_comment": "评分加权仓位配置（compute_position_plan 读取）。",
+  "enabled": true,
+  "total_planned": 200000,
+  "per_stock_cap": 0.12,
+  "tier_weights": {"pass": 1.0, "warn": 0.5},
+  "warn_policy": "observe_only"
+}
